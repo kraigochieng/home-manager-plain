@@ -30,23 +30,29 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <meta>
+            <link rel="stylesheet" type="text/css" href="styles.css"></link>
+        </meta>
         <title>
             <?php echo $home["name"]; ?>
         </title>
     </head>
     <body>
-        <h1><?php echo $home["name"]; ?></h1>
-        <h2>Rooms</h2>
-        <?php
-        foreach($rooms as $room) {
-            echo "<a href='item.php?home_id={$home_id}&room_id={$room['id']}'><p>{$room['name']}</p></a>\n";
-        }
-        ?>
-        <h3>Add room</h3>
-        <form method="POST" action="">
-            <input type="text" name="room_name" placeholder="Room Name" value="" />
-            <button type="submit">Save</button>        
-        </form>
         <a href="index.php">Back To Homes</a>
+        
+        <h1><?php echo $home['name']; ?></h1>
+            
+        <a href="<?php echo "add_room.php?home_id={$home_id}" ?>"><button>Add Room</button></a>
+        <?php
+            // List of rooms
+            if(count($rooms) === 0) {
+                echo "<p>No rooms yet.</p>";
+            } else {
+                foreach($rooms as $room) {
+                    echo "<h2>Rooms</h2><a href='item.php?home_id={$home_id}&room_id={$room['id']}'><p>{$room['name']}</p></a>\n";
+                }
+            }
+        ?>
+
     </body>
 </html>
